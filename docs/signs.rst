@@ -25,7 +25,7 @@ The function should accept one argument (a dictionary, also know as an associati
 array), and return a string representing the text to be displayed.  For example::
 
     def signFilter(poi):
-        if poi['id'] == 'Sign' or poi['id'] == 'minecraft:sign':
+        if poi['id'] in ['Sign', 'minecraft:sign']:
             return "\n".join([poi['Text1'], poi['Text2'], poi['Text3'], poi['Text4']])
 
 If a POI doesn't match, the filter can return None (which is the default if a python 
@@ -56,12 +56,12 @@ be used as the hover text, the second will be used as the info window content::
             return ("Chest", "Chest with %d items" % len(poi['Items']))
 
 Because of the way the config file is loaded, if you need to import a function or module
-for use in your filter function, you need to explicitly load it into the global namespace:
+for use in your filter function, you need to explicitly load it into the global namespace::
 
     global escape
     from cgi import escape
     def signFilter(poi):
-        if poi['id'] == 'Sign':
+        if poi['id'] in ['Sign', 'minecraft:sign']:
             return "\n".join(map(escape, [poi['Text1'], poi['Text2'], poi['Text3'], poi['Text4']]))
 
 Since writing these filters can be a little tedious, a set of predefined filters
